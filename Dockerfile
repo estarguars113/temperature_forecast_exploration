@@ -5,6 +5,9 @@ WORKDIR /usr/app
 
 COPY ./ ./
 
-RUN python3 read_data.py
+RUN pip3 install -r requirements.txt
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+ENTRYPOINT ["jupyter"] 
+CMD ["notebook", "--ip='*'", "--no-browser"]
+
