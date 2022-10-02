@@ -7,10 +7,11 @@ The purpose of this project is to get an initial overview of the dataset provide
 ### Requirements
 
 * Docker
+* Data folder with the source files
 
 ### Why to use Docker
 
-THe base image selected for the project geopython/pygeoapi contains already all the dependencies to handle netcdf files() with xarray library without the need to configure those in the host user environment
+The base image selected for the project geopython/pygeoapi contains already all the dependencies to handle netcdf files with xarray library without the need to configure those in the host user environment
   
 ### Database modeling
 
@@ -22,7 +23,10 @@ Assumming that the goal is to allow queries defining specific sets of coordinate
  * Postgres
  * Postgis
 
-The support database selected will be postgres in combination with the extension postgis, to support geographical data types , in this case specifically we would assume that the possible expected queries are the type of get me all the temperature forecasts made for this city or inside this coordinates window. To support that we would use 2 of the supported geometries by postgis:
+The support database selected will be postgres in combination with the extension postgis, to support geographical data types , in this case specifically we would assume that the possible expected queries are the type of:
+* Bring me all the temperature forecasts made for this city/coordinates window
+
+To support that we would use 2 of the supported geometries by postgis:
 
 * Point, to represent an specific point in space(lat, lon) enriched with the prediction data
 * Polygon to represent reference places that can be used to filter
@@ -62,7 +66,7 @@ INSERT INTO city(name, geom)
 
 #### Time based queries
 
-Let's assume initially that the expected granularity used in the queries is daily level, in such case it would be better to use time based partitions to improve the filtering and consequently the response time, this will imply convert our previous table defintion in the followin way
+Let's assume initially that the expected granularity used in the queries is daily level, in such case it would be better to use time based partitions to improve the filtering and consequently the response time, this will imply convert our previous table defintion in the following way
 
 Query example: Return the minimun temperature expected in the Lyon's area for the month of february in all the years
 ```sql
