@@ -2,3 +2,4 @@ data/*
 stage_date/*
 env/*
 .vscode/*
+.ipynb_checkpoints/*
